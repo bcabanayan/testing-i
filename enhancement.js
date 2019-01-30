@@ -1,3 +1,12 @@
+// for reference
+
+const excalibur = {
+    name: 'excalibur',
+    type: 'weapon',
+    durability: 100,
+    enhancement: 0
+}
+
 module.exports = {
     success: (item) => {
         
@@ -8,6 +17,6 @@ module.exports = {
     },
 
     repair: (item) => {
-        
+
     }
 }
