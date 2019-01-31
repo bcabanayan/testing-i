@@ -16,6 +16,12 @@ describe('enhancement success', () => {
     test('enhancement display changes from numerals to PRI at enhancement level 16', () => {
         expect(enhancement.success({name: '[+15]itemName', enhancement: 15})).toEqual({name: '[PRI]itemName', enhancement: 16});
     }); 
+    test('item at enhancement 14 or lower cannot be enhanced if durability below 25', () => {
+        expect(enhancement.success({enhancement: 12, durability: 20})).toEqual({enhancement: 12, durability: 20});
+    }); 
+    test('item at enhancement 15 or higher cannot be enhanced if durability below 10', () => {
+        expect(enhancement.success({enhancement: 15, durability: 9})).toEqual({enhancement: 15, durability: 9});
+    }); 
 });
 
 
@@ -38,6 +44,12 @@ describe('enhancement fail', () => {
     test(' durability decreased by 10 if enhancement greater than 14', () => {
         expect(enhancement.fail({enhancement: 16, durability: 90})).toEqual({enhancement: 16, durability: 80});
     });
+    test('enhancement decreased by 1 if enhancement greater than 16', () => {
+        expect(enhancement.fail({enhancement: 17})).toEqual({enhancement: 16});
+    });
+    test('name changes if enhancement decreases', () => {
+        expect(enhancement.fail({enhancement: 18, name: '[TRI]itemName'})).toEqual({enhancement: 17, name: '[DUO]itemName'});
+    }); 
 });
 
 describe('item repair', () => {
