@@ -32,6 +32,12 @@ describe('enhancement fail', () => {
     test('durability cannot be less than 0 when the enhancement between 15 and 19', () => {
         expect(enhancement.fail({enhancement: 16, durability: 0})).toEqual({enhancement: 16, durability: 0});
     });
+    test(' durability decreased by 5 if enhancement between 0 and 14', () => {
+        expect(enhancement.fail({enhancement: 12, durability: 95})).toEqual({enhancement: 12, durability: 90});
+    });
+    test(' durability decreased by 10 if enhancement greater than 14', () => {
+        expect(enhancement.fail({enhancement: 16, durability: 90})).toEqual({enhancement: 16, durability: 80});
+    });
 });
 
 describe('item repair', () => {
