@@ -106,7 +106,7 @@ describe('enhancement fail', () => {
             }))
             .toEqual({
                 type: 'armor', 
-                enhancement: 6
+                enhancement: 5
             });
     });
     test('enhancing weapon up to 7 cannot fail', () => {
@@ -167,10 +167,12 @@ describe('enhancement fail', () => {
     test('enhancement decreased by 1 if enhancement greater than 16', () => {
         expect(enhancer
             .fail({
-                enhancement: 17
+                enhancement: 17,
+                durability: 90
             }))
             .toEqual({
-                enhancement: 16
+                enhancement: 16,
+                durability: 80
             });
     });
     test('name changes if enhancement decreases', () => {

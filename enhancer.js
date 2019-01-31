@@ -41,7 +41,26 @@ module.exports = {
     },
 
     fail: (item) => {
-
+        if ((item.enhancement <= 5 && item.type === 'armor') || (item.enhancement <= 7 && item.type === 'weapon')) {
+            item.enhancement = item.enhancement + 1;
+            return item;
+        }
+        else if (item.durability <= 20 && item.enhancement <= 14) {
+            return item;
+        }
+        else if (item.durability <= 0 && (item.enhancement >= 15 && item.enhancement <= 19)) {
+            return item;
+        }
+        else if (item.enhancement <= 14) {
+            item.durability = item.durability - 5;
+        }
+        else if (item.enhancement > 14) {
+            item.durability = item.durability - 10;
+            if (item.enhancement > 16) {
+                item.enhancement = item.enhancement - 1; 
+            }
+        }
+        return item;
     },
 
     repair: (item) => {
