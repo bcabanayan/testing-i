@@ -2,19 +2,19 @@ const enhancer = require('./enhancer.js');
 
 describe('enhancement success', () => {
     test('enhancement level 0 displays nothing before name', () => {
-        expect(enhancer.success({enhancement: 0, name: 'itemName'})).toEqual({enhancement: 1, name:'[+1]itemName'});
+        expect(enhancer.success({enhancement: 0, name: 'itemName', baseName: 'itemName', namePrefix: ''})).toEqual({enhancement: 1, name:'[+1]itemName', baseName: 'itemName', namePrefix: '[+1]'});
     });
     test('maximum enhancement is level 20 (PEN)', () => {
-        expect(enhancer.success({enhancement: 20})).toEqual({enhancement: 20});
+        expect(enhancer.success({name: '[PEN]itemName', enhancement: 20})).toEqual({name: '[PEN]itemName', enhancement: 20});
     }); 
     test('success causes enhancement increase by 1', () => {
-        expect(enhancer.success({enhancement: 1})).toEqual({enhancement: 2});
+        expect(enhancer.success({name: '[+1]itemName', enhancement: 1, baseName: 'itemName', namePrefix: '[+1]'})).toEqual({name: '[+2]itemName', enhancement: 2, baseName: 'itemName', namePrefix: '[+2]'});
     }); 
     test('name updated to reflect new success level', () => {
-        expect(enhancer.success({name: '[DUO]itemName', enhancement: 17})).toEqual({name: '[TRI]itemName', enhancement: 18});
+        expect(enhancer.success({namePrefix: '[DUO]', baseName:'itemName', name: '[DUO]itemName', enhancement: 17})).toEqual({namePrefix: '[TRI]', baseName:'itemName', name: '[TRI]itemName', enhancement: 18});
     }); 
     test('enhancement display changes from numerals to PRI at enhancement level 16', () => {
-        expect(enhancer.success({name: '[+15]itemName', enhancement: 15})).toEqual({name: '[PRI]itemName', enhancement: 16});
+        expect(enhancer.success({namePrefix: '[+15]', baseName:'itemName', name: '[+15]itemName', enhancement: 15})).toEqual({namePrefix: '[PRI]', baseName:'itemName', name: '[PRI]itemName', enhancement: 16});
     }); 
     test('item at enhancement 14 or lower cannot be enhanced if durability below 25', () => {
         expect(enhancer.success({enhancement: 12, durability: 20})).toEqual({enhancement: 12, durability: 20});
