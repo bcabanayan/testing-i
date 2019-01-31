@@ -168,22 +168,34 @@ describe('enhancement fail', () => {
         expect(enhancer
             .fail({
                 enhancement: 17,
-                durability: 90
+                durability: 90,
+                name: '[DUO]itemName',
+                baseName: 'itemName',
+                namePrefix: '[DUO]'
             }))
             .toEqual({
                 enhancement: 16,
-                durability: 80
+                durability: 80,
+                name: '[PRI]itemName',
+                baseName: 'itemName',
+                namePrefix: '[PRI]'
             });
     });
     test('name changes if enhancement decreases', () => {
         expect(enhancer
             .fail({
                 enhancement: 18, 
-                name: '[TRI]itemName'
+                name: '[TRI]itemName',
+                baseName: 'itemName',
+                durability: 50,
+                namePrefix: '[TRI]'
             }))
             .toEqual({
                 enhancement: 17, 
-                name: '[DUO]itemName'
+                name: '[DUO]itemName',
+                baseName: 'itemName',
+                durability: 40,
+                namePrefix: '[DUO]'
             });
     }); 
 });
