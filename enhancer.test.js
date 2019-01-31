@@ -2,7 +2,7 @@ const enhancer = require('./enhancer.js');
 
 describe('enhancement success', () => {
     test('enhancement level 0 displays nothing before name', () => {
-        expect(enhancer.success({enhancement: 0, name: 'itemName'}).toEqual({enhancement: 1, name:'[+1]itemName'}));
+        expect(enhancer.success({enhancement: 0, name: 'itemName'})).toEqual({enhancement: 1, name:'[+1]itemName'});
     });
     test('maximum enhancement is level 20 (PEN)', () => {
         expect(enhancer.success({enhancement: 20})).toEqual({enhancement: 20});

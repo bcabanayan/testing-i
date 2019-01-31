@@ -2,7 +2,12 @@
 
 module.exports = {
     success: (item) => {
-        item.enhancement = item.enhancement + 1;
+        if (item.enhancement === 0) {
+            item.name = item.name;
+            if (item.enhancement <= 19) {
+                item.enhancement = item.enhancement + 1;
+            }
+        }
         return item;
     },
 
